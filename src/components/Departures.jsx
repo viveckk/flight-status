@@ -48,7 +48,6 @@ const Departures = () => {
             </div>
             <div className="p-0 card-body">
                 <div className="tab-content">
-                    {/* All Flights Tab */}
                     <div id="all-flights" className="tab-pane fade show active" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>
@@ -100,7 +99,6 @@ const Departures = () => {
                         </div>
                     </div>
 
-                    {/* Delayed Flights Tab */}
                     <div id="delayed-flights" className="tab-pane fade" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>
@@ -152,7 +150,6 @@ const Departures = () => {
                         </div>
                     </div>
 
-                    {/* Cancelled Flights Tab */}
                     <div id="cancelled-flights" className="tab-pane fade" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>

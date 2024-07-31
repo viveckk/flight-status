@@ -1,8 +1,6 @@
-// firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyClBvCLHdfvKeWjAoi2kN5lrLcxIDzIbfg",
   authDomain: "flight-status-interglobe.firebaseapp.com",
@@ -13,10 +11,8 @@ const firebaseConfig = {
   measurementId: "G-RWTHWBX9SN"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore
 const db = getFirestore(app);
 
 export { db };

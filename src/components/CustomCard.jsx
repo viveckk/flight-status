@@ -39,8 +39,8 @@ const CustomCard = () => {
                                 padding: '.25rem .45rem',
                                 fontWeight: '600',
                                 borderRadius: '.25rem',
-                                backgroundColor: 'rgba(0, 123, 255, 0.1)', // Adjust this color if needed
-                                color: 'rgb(0, 123, 255)' // Adjust this color if needed
+                                backgroundColor: 'rgba(0, 123, 255, 0.1)', 
+                                color: 'rgb(0, 123, 255)'
                             }}
                         >
                             Delayed

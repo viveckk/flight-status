@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; // Import the Firestore instance
+import { db } from '../firebaseConfig'; 
 
 const Arrivals = () => {
     const [flights, setFlights] = useState([]);
@@ -8,7 +8,7 @@ const Arrivals = () => {
     useEffect(() => {
         const fetchFlights = async () => {
             try {
-                const querySnapshot = await getDocs(collection(db, 'arrivals')); // Make sure 'arrivals' matches your Firestore collection name
+                const querySnapshot = await getDocs(collection(db, 'arrivals')); 
                 const flightsData = querySnapshot.docs.map(doc => doc.data());
                 setFlights(flightsData);
             } catch (error) {
