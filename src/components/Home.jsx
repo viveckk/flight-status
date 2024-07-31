@@ -1,5 +1,6 @@
 import React from 'react'
 import Departures from './Departures'
+import Arrivals from './Arrivals'
 
 export default function Home() {
     return (
@@ -17,7 +18,7 @@ export default function Home() {
 
                 {/* Second column with two rows */}
                 <div className="col-md-9">
-                    <div className="row mb-4">
+                    <div className="row mb-1">
                         {/* First row */}
                         <div className="col-12">
                             {/* Example content for the first row */}
@@ -31,10 +32,7 @@ export default function Home() {
                         <div className="col-12">
                             {/* Example content for the second row */}
                             <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">Second Row Content</h5>
-                                    <p className="card-text">This is the content for the second row.</p>
-                                </div>
+                                <Arrivals/>
                             </div>
                         </div>
                     </div>
