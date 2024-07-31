@@ -1,90 +1,52 @@
 import React from 'react';
+import HomeMap from './HomeMap';
 
 const CustomCard = () => {
     return (
         <div className="card overflow-hidden">
             <div className="position-relative">
-                <img
-                    src="https://react.spruko.com/ynex-js/preview/assets/35-WdnLC6zs.png"
-                    className="card-img-top"
-                    alt="map_img"
-                    style={{
-                        borderTopLeftRadius: '0.375rem',
-                        borderTopRightRadius: '0.375rem',
-                        height: '16.625rem',
-                        objectFit: 'cover'
-                    }}
-                />
-                <div className="card-img-overlay d-flex flex-column p-4 text-white" style={{ background: 'rgba(0, 0, 0, 0.5)', color: '#fff' }}>
-                    <div className="d-flex justify-content-between align-items-center">
-                        <p className="mb-1 fs-6" style={{ opacity: 0.75, fontSize: '0.875rem' }}>Flight Number</p>
-                        <div 
-                            className="d-flex flex-column align-items-center" 
-                            style={{
-                                position: 'absolute',
-                                right: '1.875rem',
-                                backgroundColor: '#ffffff40',
-                                padding: '0.5rem 0.625rem',
-                                borderRadius: '0.3rem',
-                                backdropFilter: 'blur(1.875rem)',
-                                WebkitBackdropFilter: 'blur(1.875rem)'
-                            }}
-                        >
-                            <span className="d-block fs-6 fw-bold">15</span>
-                            <span className="d-block fs-6 lh-1 fw-bold">Jan</span>
+                <HomeMap />
+            </div>
+            <div className="card-body p-3 border-md-end border-inline-end-dashed">
+                <div className="d-flex align-items-top mb-4">
+                    <div className="me-2 lh-1">
+                        <span className="avatar avatar-md avatar-rounded">
+                            <img src="https://via.placeholder.com/40" alt="" />
+                        </span>
+                    </div>
+                    <div className="flex-fill">
+                        <div className="recent-recruiter">
+                            <a className="fw-semibold mb-0 text-truncate" href="/ynex-js/preview/dashboards/jobs/">Flight Number</a>
+                            <p className="mb-0 fs-12 text-muted text-truncate">Flight Name</p>
                         </div>
                     </div>
-                    <h6 className="fw-bold mb-4" style={{ fontSize: '1.25rem' }}>Status</h6>
-                    <p
-                        className="fs-6"
-                        style={{
-                            fontSize: '0.75rem',
-                            width: '70%',
-                            borderRadius: '0.5rem',
-                            backgroundColor: '#ffffff40',
-                            opacity: 0.8,
-                            padding: '0.625rem',
-                            backdropFilter: 'blur(1.875rem)',
-                            WebkitBackdropFilter: 'blur(1.875rem)'
-                        }}
-                    >
-                        From
-                        To
-                        <a className="text-decoration-underline text-white" href="/ynex-js/preview/dashboards/ecommerce/">
-                            T&amp;C
+                    <div>
+                        <a aria-label="anchor" href="/">
+                            <img style={{ width: '25px', marginTop: '10px' }} src="https://cdn-icons-png.flaticon.com/128/8106/8106549.png" alt="Go to homepage" />
                         </a>
-                    </p>
-                    <p
-                        className="mb-0"
-                        style={{
-                            position: 'absolute',
-                            bottom: '1.25rem',
-                            fontSize: '0.75rem',
-                            borderRadius: '0.5rem',
-                            backgroundColor: '#ffffff40',
-                            opacity: 0.8,
-                            padding: '0.25rem 0.625rem',
-                            backdropFilter: 'blur(1.875rem)',
-                            WebkitBackdropFilter: 'blur(1.875rem)'
-                        }}
-                    >
-                        time - Gate
-                    </p>
+                    </div>
                 </div>
-            </div>
-            <div className="card-body">
-                <a className="text-primary fs-5 fw-bold" href="/ynex-js/preview/dashboards/ecommerce/">
-                    Biggest is back.
-                </a>
-                <p className="mb-4 mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore harum accusamus eum dolorum sapiente. Saepe
-                </p>
-                <button type="button" className="btn btn-primary me-2">
-                    Notify Me
-                </button>
-                <button type="button" className="btn btn-outline-primary">
-                    More details
-                </button>
+                <div className="d-flex align-items-top justify-content-between mb-2">
+                    <div className="text-muted fs-12">Gate</div>
+                    <div className="fw-semibold">07</div>
+                </div>
+                <div className="d-flex align-items-top justify-content-between mb-0">
+                    <div className="text-muted fs-12">Status</div>
+                    <div>
+                        <span 
+                            className="badge"
+                            style={{
+                                padding: '.25rem .45rem',
+                                fontWeight: '600',
+                                borderRadius: '.25rem',
+                                backgroundColor: 'rgba(0, 123, 255, 0.1)', // Adjust this color if needed
+                                color: 'rgb(0, 123, 255)' // Adjust this color if needed
+                            }}
+                        >
+                            Delayed
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     );
