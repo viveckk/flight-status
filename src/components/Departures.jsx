@@ -1,50 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 const Departures = () => {
-    const flights = [
-        {
-            name: "Flight A",
-            number: "A123",
-            departureTime: "18:30",
-            gate: "2",
-            status: "Arrived",
-        },
-        {
-            name: "Flight B",
-            number: "B456",
-            departureTime: "19:00",
-            gate: "3",
-            status: "Delayed",
-        },
-        {
-            name: "Flight C",
-            number: "C789",
-            departureTime: "19:30",
-            gate: "4",
-            status: "Cancelled",
-        },
-        {
-            name: "Flight D",
-            number: "D012",
-            departureTime: "20:00",
-            gate: "5",
-            status: "Arrived",
-        },
-        {
-            name: "Flight E",
-            number: "E345",
-            departureTime: "20:30",
-            gate: "6",
-            status: "Delayed",
-        },
-        {
-            name: "Flight F",
-            number: "F678",
-            departureTime: "21:00",
-            gate: "7",
-            status: "Cancelled",
-        },
-    ];
+    const [flights, setFlights] = useState([]);
+
+    useEffect(() => {
+        const fetchFlights = async () => {
+            try {
+                const querySnapshot = await getDocs(collection(db, 'departures'));
+                const flightsData = querySnapshot.docs.map(doc => doc.data());
+                setFlights(flightsData);
+            } catch (error) {
+                console.error("Error fetching flights: ", error);
+            }
+        };
+
+        fetchFlights();
+    }, []);
 
     return (
         <div className="card">
@@ -75,6 +48,7 @@ const Departures = () => {
             </div>
             <div className="p-0 card-body">
                 <div className="tab-content">
+                    {/* All Flights Tab */}
                     <div id="all-flights" className="tab-pane fade show active" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>
@@ -91,14 +65,14 @@ const Departures = () => {
                                                         </div>
                                                         <div className="align-items-center">
                                                             <span className="fs-12 text-muted">Flight Name</span>
-                                                            <p className="mb-0">{flight.name}</p>
+                                                            <p className="mb-0">{flight.flight}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Departure Time</span>
-                                                        <p className="mb-0 fw-semibold">{flight.departureTime}</p>
+                                                        <p className="mb-0 fw-semibold">{flight.time}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -110,7 +84,7 @@ const Departures = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0">{flight.Status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -125,12 +99,14 @@ const Departures = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Delayed Flights Tab */}
                     <div id="delayed-flights" className="tab-pane fade" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>
                                 <table className="table card-table table-vcenter text-nowrap mb-0">
                                     <tbody>
-                                        {flights.filter(flight => flight.status === "Delayed").map((flight, index) => (
+                                        {flights.filter(flight => flight.Status === "DELAYED").map((flight, index) => (
                                             <tr key={index}>
                                                 <td>
                                                     <div className="d-flex align-items-center">
@@ -141,14 +117,14 @@ const Departures = () => {
                                                         </div>
                                                         <div className="align-items-center">
                                                             <span className="fs-12 text-muted">Flight Name</span>
-                                                            <p className="mb-0">{flight.name}</p>
+                                                            <p className="mb-0">{flight.flight}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Departure Time</span>
-                                                        <p className="mb-0 fw-semibold">{flight.departureTime}</p>
+                                                        <p className="mb-0 fw-semibold">{flight.time}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -160,7 +136,7 @@ const Departures = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0">{flight.Status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -175,12 +151,14 @@ const Departures = () => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Cancelled Flights Tab */}
                     <div id="cancelled-flights" className="tab-pane fade" role="tabpanel">
                         <div className="table-responsive">
                             <div style={{ maxHeight: '193px', overflowY: 'auto' }}>
                                 <table className="table card-table table-vcenter text-nowrap mb-0">
                                     <tbody>
-                                        {flights.filter(flight => flight.status === "Cancelled").map((flight, index) => (
+                                        {flights.filter(flight => flight.Status === "CANCELLED").map((flight, index) => (
                                             <tr key={index}>
                                                 <td>
                                                     <div className="d-flex align-items-center">
@@ -191,14 +169,14 @@ const Departures = () => {
                                                         </div>
                                                         <div className="align-items-center">
                                                             <span className="fs-12 text-muted">Flight Name</span>
-                                                            <p className="mb-0">{flight.name}</p>
+                                                            <p className="mb-0">{flight.flight}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Departure Time</span>
-                                                        <p className="mb-0 fw-semibold">{flight.departureTime}</p>
+                                                        <p className="mb-0 fw-semibold">{flight.time}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -210,7 +188,7 @@ const Departures = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0">{flight.Status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -229,6 +207,6 @@ const Departures = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Departures;
