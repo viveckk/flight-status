@@ -1,22 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebaseConfig'; 
+import { db } from '../firebaseConfig';
 
 const Arrivals = () => {
     const [flights, setFlights] = useState([]);
 
-    useEffect(() => {
-        const fetchFlights = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, 'arrivals')); 
-                const flightsData = querySnapshot.docs.map(doc => doc.data());
-                setFlights(flightsData);
-            } catch (error) {
-                console.error("Error fetching flights: ", error);
-            }
-        };
+    // Function to get status style
+    const getStatusStyle = (status) => {
+        switch (status) {
+            case 'ON TIME':
+            case 'LANDED':
+                return { backgroundColor: 'rgba(40, 167, 69, 0.1)', color: 'rgb(40, 167, 69)' };
+            case 'CANCELLED':
+            case 'DELAYED':
+            case 'GATES CLOSED':
+            case 'GATE CLOSED':
+                return { backgroundColor: 'rgba(220, 53, 69, 0.1)', color: 'rgb(220, 53, 69)' };
+            case 'GATE CLOSING':
+            case 'BOARDING':
+                return { backgroundColor: 'rgba(255, 102, 0, 0.1)', color: '#FF6600' };
+            default:
+                return { backgroundColor: 'transparent', color: 'black' };
+        }
+    };
 
+    // Fetch flights data
+    const fetchFlights = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db, 'arrivals'));
+            const flightsData = querySnapshot.docs.map(doc => doc.data());
+            setFlights(flightsData);
+        } catch (error) {
+            console.error("Error fetching flights: ", error);
+        }
+    };
+
+    useEffect(() => {
+        // Fetch data initially
         fetchFlights();
+
+        // Set up interval to fetch data every 15 seconds
+        const intervalId = setInterval(() => {
+            fetchFlights();
+        }, 15000); // 15000 milliseconds = 15 seconds
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
@@ -83,7 +112,7 @@ const Arrivals = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0 fw-semibold" style={getStatusStyle(flight.status)}>{flight.status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -133,7 +162,7 @@ const Arrivals = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0 fw-semibold" style={getStatusStyle(flight.status)}>{flight.status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -183,7 +212,7 @@ const Arrivals = () => {
                                                 <td>
                                                     <div className="align-items-center">
                                                         <span className="fs-12 text-muted">Status</span>
-                                                        <p className="mb-0">{flight.status}</p>
+                                                        <p className="mb-0 fw-semibold" style={getStatusStyle(flight.status)}>{flight.status}</p>
                                                     </div>
                                                 </td>
                                                 <td>
